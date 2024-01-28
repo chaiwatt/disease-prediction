@@ -22,10 +22,13 @@
                             <input type="text" class="form-control" id="symptom">
                         </div>
                         <div class="mb-3">
-                            <label for="phrase" class="form-label">Training phrase (One per line)</label>
+                            <label for="phrase" class="form-label">Training phrase (One per line) <a
+                                    type="button btn-sm" class="btn btn-info text-white" id="btn-ai-guideline">AI
+                                    guideline</a></label>
                             <textarea class="form-control" id="phrase" rows="15"></textarea>
                         </div>
                     </div>
+                    <a type="button" class="btn btn-secondary" id="btn-clear">Clear</a>
                     <a type="button" class="btn btn-primary" style="float: right" id="btn-add">Add</a>
                 </div>
             </div>
@@ -37,6 +40,7 @@
 <script>
     window.params = {
         storeSymptomRoute: '{{ route('dashboard.symptom.store') }}',
+        genPhraseRoute: '{{ route('dashboard.symptom.gen-phrase') }}',
         url: '{{ url('/') }}',
         token: $('meta[name="csrf-token"]').attr('content')
     };
@@ -84,6 +88,40 @@
         }).catch(error => { })
 
     });
+
+    $(document).on('click', '#btn-ai-guideline', function (e) {
+        e.preventDefault();
+        var token = window.params.token
+        var genPhraseRoute = window.params.genPhraseRoute
+        
+        var symptom = $('#symptom').val() || null;
+
+        if (symptom === null) {
+            Swal.fire(
+                'Wrong',
+                'Symptom cannot be empty.',
+                'warning'
+            )
+            return
+        }
+        
+        var data = {
+            'symptom': symptom,
+        }
+
+        postRequest(data, genPhraseRoute, token).then(response => {
+             $('#phrase').val(response);
+        }).catch(error => { })
+
+    });
+
+    $(document).on('click', '#btn-clear', function (e) {
+        e.preventDefault();
+       $('#symptom').val('');
+       $('#phrase').val('');
+        
+    });
+    
     
     function postRequest(dataSet, url, token) {
         return new Promise((resolve, reject) => {

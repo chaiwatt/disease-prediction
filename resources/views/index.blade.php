@@ -17,7 +17,7 @@
             </defs>
         </svg>
     </div>
-    <div class="cs_height_190 cs_height_xl_145 cs_height_lg_105"></div>
+    <div class="cs_height_150 cs_height_xl_125 cs_height_lg_90"></div>
     <div class="container">
         <div class="row align-items-center cs_gap_y_40">
 
@@ -25,63 +25,29 @@
 
             <!-- </div> -->
             <div class="col-lg-6">
-                <div class="cs_section_heading cs_style_1">
+
+                <div class="cs_height_35 cs_height_lg_50"></div>
+                <form action="#" class="row">
+
                     <h3
                         class="cs_section_subtitle text-uppercase cs_accent_color cs_semibold m-0 cs_accent_color cs_fs_32">
                         Descripe your symptoms</h3>
                     <!-- <div class="cs_height_5"></div> -->
-                    <div class="cs_height_20 cs_height_lg_50"></div>
                     <span class="mt-4">To help our disease prediction system accurately analyze your symptoms,
                         please be as specific as possible with each
                         symptom, listing one per line for best results, <a href="#" id="example">click for
                             example.</a></span>
-
-                    <!-- <h2 class="cs_section_title cs_fs_72 m-0">Below</h2> -->
-                </div>
-                <div class="cs_height_35 cs_height_lg_50"></div>
-                <form action="#" class="row">
+                    <div class="cs_height_20 cs_height_lg_50"></div>
                     <div class="col-lg-12">
-                        {{-- <label class="cs_input_label cs_heading_color">Age</label> --}}
                         <input type="text" id="prompt" class="cs_form_field"
                             placeholder="Describe single symptom here then press enter to add to list.">
                         <div class="cs_height_42 cs_height_xl_25"></div>
                     </div>
-
                     <div class="col-lg-12">
-
-
-                        <!-- <div class="row">
-                     
-                      <div class="col-lg-12"> -->
-                        <!-- <label class="cs_input_label cs_heading_color">Message</label> -->
-                        <textarea id="symptoms" cols="30" rows="8" class="cs_form_field" readonly></textarea>
-                        <div class="cs_height_42 cs_height_xl_25"></div>
-                    </div>
-                    <div class="col-lg-6">
-                        {{-- <label class="cs_input_label cs_heading_color">Gender</label> --}}
-                        <select name="reason_for_visit" class="cs_select" data-placeholder="Gender">
-                            <!-- <option></option> -->
-                            <option value="routine-checkup">Male</option>
-                            <option value="Operation">Female</option>
-                        </select>
+                        <textarea id="symptoms" cols="30" rows="12" class="cs_form_field" readonly></textarea>
                         <div class="cs_height_42 cs_height_xl_25"></div>
                     </div>
 
-                    <div class="col-lg-6">
-                        {{-- <label class="cs_input_label cs_heading_color">Age</label> --}}
-                        <input type="text" class="cs_form_field" placeholder="Age in years">
-                        <div class="cs_height_42 cs_height_xl_25"></div>
-                    </div>
-                    <div class="col-lg-6">
-                        {{-- <label class="cs_input_label cs_heading_color">Weight</label> --}}
-                        <input type="text" class="cs_form_field" placeholder="Weight in Kgs">
-                        <div class="cs_height_42 cs_height_xl_25"></div>
-                    </div>
-                    <div class="col-lg-6">
-                        {{-- <label class="cs_input_label cs_heading_color">Height</label> --}}
-                        <input type="text" class="cs_form_field" placeholder="Height in cm">
-                        <div class="cs_height_42 cs_height_xl_25"></div>
-                    </div>
                     <div class="col-lg-12">
                         <div class="cs_height_18"></div>
                         <button class="cs_btn cs_style_1">
@@ -91,45 +57,7 @@
                                 <img src="assets/img/icons/arrow_white.svg" alt="Icon">
                             </i>
                         </button>
-                        <!-- </div>
-    
-                  </div> -->
-
-                        <!-- <label class="cs_input_label cs_heading_color cs_fs_18 cs_medium">Comment*</label>
-                  <textarea cols="30" rows="8" class="cs_form_field_2"></textarea>
-                  <div class="cs_height_42 cs_height_xl_25"></div> -->
                     </div>
-
-
-
-                    <!-- <div class="col-lg-12">
-                    <label class="cs_input_label cs_heading_color">Reason for Visit</label>
-                    <div class="cs_radio_group">
-                      <div class="cs_radio_wrap">
-                        <input class="cs_radio_input" type="radio" name="reasonForVisit" id="routineCheckup" value="routineCheckup">
-                        <label class="cs_radio_label" for="routineCheckup">Routine Checkup</label>
-                      </div>
-                      <div class="cs_radio_wrap">
-                        <input class="cs_radio_input" type="radio" name="reasonForVisit" id="newPatientVisit" value="newPatientVisit" checked>
-                        <label class="cs_radio_label" for="newPatientVisit">New Patient Visit</label>
-                      </div>
-                      <div class="cs_radio_wrap">
-                        <input class="cs_radio_input" type="radio" name="reasonForVisit" id="specificConcern" value="specificConcern">
-                        <label class="cs_radio_label" for="specificConcern">Specific Concern</label>
-                      </div>
-                    </div>
-                    <div class="cs_height_42 cs_height_xl_25"></div>
-                  </div>
-                -->
-                    <!-- <div class="col-lg-12">
-                    <button class="cs_btn cs_style_1">
-                      <span>Submit</span>
-                      <i>
-                        <img src="assets/img/icons/arrow_white.svg" alt="Icon">
-                        <img src="assets/img/icons/arrow_white.svg" alt="Icon">
-                      </i>
-                    </button>
-                  </div> -->
                 </form>
             </div>
             <div class="col-lg-5 offset-lg-1 text-center">
@@ -138,8 +66,7 @@
         </div>
     </div>
 </section>
-<!-- End Appointment Section -->
-<!-- Start FAQ Section -->
+
 <section hidden>
     <div class="cs_height_100 cs_height_xl_145 cs_height_lg_105"></div>
     <div class="container">

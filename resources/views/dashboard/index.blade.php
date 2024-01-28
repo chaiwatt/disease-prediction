@@ -35,9 +35,11 @@
                                     <td>{{$disease->name}}</td>
                                     <td style="text-align: center">{{$disease->symptoms->count()}}</td>
                                     <td style="text-align: right">
-                                        <a type="button" class="btn btn-primary">Edit</a>
-                                        <a type="button" class="btn btn-info text-white">Engage</a>
-                                        <a type="button" class="btn btn-danger">Delete</a>
+                                        {{-- <a type="button" class="btn btn-primary">Edit</a> --}}
+                                        <a href="{{route('dashboard.engage',['id' => $disease->id])}}"
+                                            class="btn btn-primary">Engage</a>
+                                        <a href="{{route('delete-disease',['id' => $disease->id])}}"
+                                            class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

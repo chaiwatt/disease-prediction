@@ -24,4 +24,11 @@ class DashboardController extends Controller
         
         return response()->json($disease);
     }
+
+    public function deleteDisease($id)
+    {
+        Disease::find($id)->delete();
+        
+        return redirect()->back();
+    }
 }

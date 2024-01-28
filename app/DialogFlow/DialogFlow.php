@@ -144,6 +144,43 @@ class DialogFlow
         }
     }
 
+    public function deleteAllIntent()
+    {
+        try {
+            $projectId = env('DIALOGFLOW_PROJECT_ID');
+            $intentsClient = new IntentsClient();
+            $parent = $intentsClient->agentName($projectId);
+            $intents = $intentsClient->listIntents($parent);
+            $uuid = null;
+            foreach ($intents->iterateAllElements() as $intent) {
+                $intentName = (string) $intent->getName();
+                $uuid = substr($intentName, strrpos($intentName, '/') + 1);
+                $intentName = $intentsClient->intentName($projectId, $uuid);
+                $intentsClient->deleteIntent($intentName);
+            }
+
+            return response()->json([
+                        'successful' => $intentName . 'deleted',
+                    ], 200);
+        } catch (ApiException $e) {
+            $errorDetails = json_decode($e->getMessage(), true);
+
+            if (isset($errorDetails['message'])) {
+                return response()->json([
+                    'error' => $errorDetails['message'],
+                ], 400); // You can adjust the status code accordingly
+            } else {
+                return response()->json([
+                    'error' => 'An unexpected error occurred: ' . $e->getMessage(),
+                ], 500);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => 'An unexpected error occurred: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
 
     public function detectIntentText($message)
     {

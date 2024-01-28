@@ -29,4 +29,15 @@ class ProcessingController extends Controller
         
         return $response;
     }
+
+     public function deleteAllIntent(Request $request)
+    {
+        $diablogFlow = new DialogFlow();
+       
+        $response = $diablogFlow->deleteAllIntent();
+        
+        return $response;
+    }
+
+    
 }

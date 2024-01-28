@@ -39,5 +39,6 @@ Route::group(['prefix' => 'processing'], function () {
     Route::get('create-intent', [ProcessingController::class, 'createIntent'])->name('processing.create-intent');
     Route::post('text-detection', [ProcessingController::class, 'textDetection'])->name('processing.text-detection');
     Route::get('delete-intent', [ProcessingController::class, 'deleteIntent'])->name('delete-intent');
+    Route::get('delete-all-intent', [ProcessingController::class, 'deleteAllIntent'])->name('delete-all-intent');
 });
 

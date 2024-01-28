@@ -32,11 +32,13 @@
                         symptom, listing one per line for best results, <a href="#" id="example">click for
                             example.</a></span>
                     <div class="cs_height_20 cs_height_lg_50"></div>
+
                     <div class="col-lg-12">
                         <input type="text" id="prompt" class="cs_form_field"
                             placeholder="Describe single symptom here then press enter to add to list.">
                         <div class="cs_height_42 cs_height_xl_25"></div>
                     </div>
+
                     <div class="col-lg-12">
                         <textarea id="symptoms" cols="30" rows="12" class="cs_form_field" readonly></textarea>
                         <div class="cs_height_42 cs_height_xl_25"></div>

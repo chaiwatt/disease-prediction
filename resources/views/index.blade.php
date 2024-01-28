@@ -20,15 +20,9 @@
     <div class="cs_height_150 cs_height_xl_125 cs_height_lg_90"></div>
     <div class="container">
         <div class="row align-items-center cs_gap_y_40">
-
-            <!-- <div class="cs_contact_form cs_style_1 cs_white_bg cs_radius_30"> -->
-
-            <!-- </div> -->
             <div class="col-lg-6">
-
                 <div class="cs_height_35 cs_height_lg_50"></div>
                 <form action="#" class="row">
-
                     <h3
                         class="cs_section_subtitle text-uppercase cs_accent_color cs_semibold m-0 cs_accent_color cs_fs_32">
                         Descripe your symptoms</h3>
@@ -110,7 +104,8 @@
 
                                 If you or your child develops any of these symptoms, you should seek medical care
                                 right away. <a
-                                    href="https://dph.illinois.gov/topics-services/diseases-and-conditions/diseases-a-z-list/afm.html">More
+                                    href="https://dph.illinois.gov/topics-services/diseases-and-conditions/diseases-a-z-list/afm.html"
+                                    target="blank">More
                                     Info</a> </p>
                             <button class="cs_btn cs_style_1 mt-3">
                                 <span>More Info</span>

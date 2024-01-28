@@ -15,9 +15,6 @@ class DiseasesTableSeeder extends Seeder
     {
          DB::table('diseases')->insert([
             [
-                'name' => 'Cancer'
-            ],
-            [
                 'name' => 'Diabetes'
             ],
             [
@@ -95,7 +92,6 @@ class DiseasesTableSeeder extends Seeder
             [
                 'name' => 'Cardiovacular Disease'
             ]
-            
         ]);
     }
 }

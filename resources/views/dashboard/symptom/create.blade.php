@@ -1,5 +1,32 @@
 @extends('layouts.landing')
+@push('styles')
+<style>
+    .spinner,
+    .spinner1 {
+        animation: spin 1s linear infinite;
+    }
 
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+@endpush
 @section('content')
 <!-- Start Appointment Section -->
 <section class="cs_shape_wrap" id="appointment">
@@ -23,13 +50,36 @@
                         </div>
                         <div class="mb-3">
                             <label for="phrase" class="form-label">Training phrase (One per line) <a
-                                    type="button btn-sm" class="btn btn-info text-white" id="btn-ai-guideline">AI
+                                    type="button btn-sm" class="btn btn-info text-white" id="show_modal"> AI
                                     guideline</a></label>
                             <textarea class="form-control" id="phrase" rows="15"></textarea>
                         </div>
                     </div>
                     <a type="button" class="btn btn-secondary" id="btn-clear">Clear</a>
-                    <a type="button" class="btn btn-primary" style="float: right" id="btn-add">Add</a>
+                    <a type="button" class="btn btn-primary" style="float: right" id="btn-add"><i
+                            class="fa-solid fa-spinner spinner1"></i> Add</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="genPhraseModal" tabindex="-1" aria-labelledby="genPhraseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="genPhraseModalLabel">AI Guideline</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="phrase" class="form-label">AI Prompt</label>
+                        <textarea class="form-control" id="prompt" rows="7"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="generate-phrase"><i
+                            class="fa-solid fa-spinner spinner"></i> Generate</button>
                 </div>
             </div>
         </div>
@@ -38,12 +88,33 @@
 
 @push('scripts')
 <script>
+    $(".spinner").hide();
+    $(".spinner1").hide();
     window.params = {
         storeSymptomRoute: '{{ route('dashboard.symptom.store') }}',
         genPhraseRoute: '{{ route('dashboard.symptom.gen-phrase') }}',
         url: '{{ url('/') }}',
         token: $('meta[name="csrf-token"]').attr('content')
     };
+
+    $(document).on('click', '#show_modal', function (e) {
+        e.preventDefault();
+        var symptom = $('#symptom').val() || null;
+          if (symptom === null) {
+            Swal.fire(
+                'Wrong',
+                'Symptom cannot be empty.',
+                'warning'
+            )
+            return
+        }
+
+        // var prompt = `Create an array of 15 ${symptom} sentences for Dialogflow training phrases by using this sentence "I have a ${symptom}" or similar as guidline. Then end with \\n of each sentence like this: sentence1\\n sentence2\\n sentence3\\n ... and do not add sentence numbers before each sentence.`;
+        var prompt = `Create an array of 15 ${symptom} sentences for Dialogflow training phrases by using this sentence "I have a ${symptom}" or similar as guidline. Then list down line by line for each sentence like this: sentence1\\n sentence2\\n sentence3\\n ... and do not add sentence numbers before each sentence.`;
+        $('#prompt').val(prompt);
+        $('#genPhraseModal').modal('show');
+
+    });
 
     $(document).on('click', '#btn-add', function (e) {
         e.preventDefault();
@@ -77,7 +148,12 @@
             'phrases': phrases,
         }
 
+        var spinner = $(this).find('.spinner1');
+            // แสดง Spinner
+            spinner.show();
+
         postRequest(data, storeSymptomRoute, token).then(response => {
+            spinner.hide();
              Swal.fire(
                 'Done',
                 'Symtomps successful created',
@@ -89,28 +165,37 @@
 
     });
 
-    $(document).on('click', '#btn-ai-guideline', function (e) {
+    $(document).on('click', '#generate-phrase', function (e) {
         e.preventDefault();
         var token = window.params.token
         var genPhraseRoute = window.params.genPhraseRoute
         
-        var symptom = $('#symptom').val() || null;
+        var prompt = $('#prompt').val() || null;
 
-        if (symptom === null) {
+        if (prompt === null) {
             Swal.fire(
                 'Wrong',
-                'Symptom cannot be empty.',
+                'Prompt cannot be empty.',
                 'warning'
             )
             return
         }
-        
+        var spinner = $(this).find('.spinner');
+        // แสดง Spinner
+        spinner.show();
         var data = {
-            'symptom': symptom,
+            'prompt': prompt
         }
 
         postRequest(data, genPhraseRoute, token).then(response => {
-             $('#phrase').val(response);
+            // var response = response.replace(/\n\n/g, '\n');
+            console.log(response);
+            $('#genPhraseModal').modal('hide');
+            var symptom = $('#symptom').val();
+            var prompt = `${symptom}.\n${response} `;
+
+             $('#phrase').val(prompt);
+             spinner.hide();
         }).catch(error => { })
 
     });

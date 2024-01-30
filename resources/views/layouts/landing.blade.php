@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/plugins/animated-headline.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    @stack('styles')
 </head>
 
 <body>

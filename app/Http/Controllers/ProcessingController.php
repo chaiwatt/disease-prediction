@@ -97,14 +97,7 @@ class ProcessingController extends Controller
     //     return view('result-render.result', ['sortedDiseases' => $sortedDiseases])->render();
     // }
 
-    public function trainingPhrase()
-    {
-        $diablogFlow = new DialogFlow();
-       
-        $response = $diablogFlow->getTrainingPhrase();
-        
-        return $response;
-    }
+
 
     
 }

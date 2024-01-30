@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('', [LandingController::class, 'index'])->name('index');
+Route::get('about', [LandingController::class, 'about'])->name('about');
 Route::get('gen-text', [GeminiController::class, 'genText'])->name('gen-text');
 
 

@@ -58,7 +58,7 @@
                 </form>
             </div>
             <div class="col-lg-5 offset-lg-1 text-center">
-                <img src="assets/img/home_1/appointment.jpg" alt="Appointment" class="cs_radius_30">
+                <img src="assets/img/home_1/appointment.png" alt="Appointment" class="cs_radius_30">
             </div>
         </div>
     </div>

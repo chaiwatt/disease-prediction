@@ -60,18 +60,15 @@
                         </a>
                         <nav class="cs_nav">
                             <ul class="cs_nav_list">
-                                <li><a href="#">About</a></li>
+                                <li><a href="{{route('about')}}">About</a></li>
+                                <li><a href="#">Usage</a></li>
                                 <li><a href="#">Team</a></li>
                                 <li>
-
                                     @if (!Auth::check())
                                     <a href="{{route('login')}}">Login</a>
                                     @else
                                     <a href="{{route('dashboard')}}">Dashboard</a>
-
-
                                     @endif
-
                                 </li>
                             </ul>
                         </nav>
@@ -93,7 +90,8 @@
                     <div class="cs_social_links_wrap">
                         <h2 class="cs_white_color">Follow Us</h2>
                         <div class="cs_social_links">
-                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=100082825587379"><i
+                                    class="fa-brands fa-facebook-f"></i></a>
                         </div>
                     </div>
                     <div class="cs_copyright">Copyright © 2024 Disease Prediction - The Prince Royal's College SMEP. All

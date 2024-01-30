@@ -36,10 +36,17 @@
                     <div class="col-lg-12">
                         <input type="text" id="prompt" class="cs_form_field"
                             placeholder="Describe single symptom here then press enter to add to list.">
-                        <div class="cs_height_42 cs_height_xl_25"></div>
+                        <div class="cs_height_20 cs_height_xl_10"></div>
                     </div>
-
                     <div class="col-lg-12">
+
+                        <button class="cs_btn cs_style_1" id="add_symptom">
+                            <span>Add symptom</span>
+                        </button>
+                    </div>
+                    <div class="cs_height_18"></div>
+                    <div class="col-lg-12">
+
                         <textarea id="symptoms" cols="30" rows="12" class="cs_form_field" id="symptoms"
                             readonly></textarea>
                         <div class="cs_height_42 cs_height_xl_25"></div>
@@ -92,8 +99,60 @@
             }
 
             postRequest(data, textDetectionRoute, token).then(response => {
-                console.log(response);
+                //console.log(response);
                 var bot = response.message.intentBot;
+                if(bot !== null){
+                    var fulfilmentText = response.message.fulfilmentText;
+                    console.log(response.message);
+                    if(bot !== 'Default Fallback Intent'){
+                        if ($('#symptoms').val().indexOf(fulfilmentText) === -1) {
+                            $('#symptoms').val(function (index, currentValue) {
+                                return currentValue + fulfilmentText + '\n';
+                            });
+                        }
+                    }else{
+                        Swal.fire({
+                            position: "center",
+                            // icon: "error",
+                            title: fulfilmentText,
+                            showConfirmButton: false,
+                            timer: 5000
+                        });
+                    }
+                }else{
+                    Swal.fire({
+                        position: "center",
+                        // icon: "error",
+                        title: 'Internal Error, Please try again',
+                        showConfirmButton: false,
+                        timer: 5000
+                    });
+                }
+
+                
+            }).catch(error => { })
+            
+            $(this).val('');
+        }
+    });
+
+    $(document).on('click', '#add_symptom', function (e) {      
+        e.preventDefault(); 
+        
+        var token = window.params.token
+        var textDetectionRoute = window.params.textDetectionRoute
+
+        if($('#prompt').val() == ""){
+            return;
+        }
+        var data = {
+            'message': $('#prompt').val()
+        }
+
+        postRequest(data, textDetectionRoute, token).then(response => {
+            //console.log(response);
+            var bot = response.message.intentBot;
+            if(bot !== null){
                 var fulfilmentText = response.message.fulfilmentText;
                 console.log(response.message);
                 if(bot !== 'Default Fallback Intent'){
@@ -104,17 +163,28 @@
                     }
                 }else{
                     Swal.fire({
-                    position: "center",
-                    icon: "error",
-                    title: fulfilmentText,
-                    showConfirmButton: false,
-                    timer: 3000
+                        position: "center",
+                        // icon: "error",
+                        title: fulfilmentText,
+                        showConfirmButton: false,
+                        timer: 5000
                     });
                 }
-            }).catch(error => { })
+            }else{
+                Swal.fire({
+                    position: "center",
+                    // icon: "error",
+                    title: 'Internal Error, Please try again',
+                    showConfirmButton: false,
+                    timer: 5000
+                });
+            }
+
             
-            $(this).val('');
-        }
+        }).catch(error => { })
+        
+        $(this).val('');
+    
     });
 
     $(document).on('click', '#example', function (e) {

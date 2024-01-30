@@ -156,7 +156,10 @@ class DialogFlow
                 $intentName = (string) $intent->getName();
                 $uuid = substr($intentName, strrpos($intentName, '/') + 1);
                 $intentName = $intentsClient->intentName($projectId, $uuid);
-                $intentsClient->deleteIntent($intentName);
+                if($intent->getDisplayName() == "Default Fallback Intent"){
+                    $intentsClient->deleteIntent($intentName);
+                }
+                
             }
 
             return response()->json([
@@ -206,28 +209,40 @@ class DialogFlow
         try {
             $response = $sessionsClient->detectIntent($session, $queryInput); 
 
-            $queryResult = $response->getQueryResult();
-            $queryText = $queryResult->getQueryText();
-            $intent = $queryResult->getIntent();
-            $displayName = $intent->getDisplayName();
-            $confidence = $queryResult->getIntentDetectionConfidence();
-            $fulfilmentText = $queryResult->getFulfillmentText();
-            $lgCode = $queryResult->getLanguageCode();
-
-
-            $result = [
-                "queryText" => $queryText,
-                "intentBot" => $displayName,
-                "confidence" => $confidence,
-                "fulfilmentText" => $fulfilmentText,
-                "languageCode" => $lgCode,
-
-            ];
             
-            $sessionsClient->close($session);
-            return response()->json([
-                        'message' => $result,
-                    ], 200);
+
+            $queryResult = $response->getQueryResult();
+
+
+            if($queryResult->getIntent() !== null){
+                $queryText = $queryResult->getQueryText();
+                $intent = $queryResult->getIntent();
+                $displayName = $intent->getDisplayName();
+                $confidence = $queryResult->getIntentDetectionConfidence();
+                $fulfilmentText = $queryResult->getFulfillmentText();
+                $lgCode = $queryResult->getLanguageCode();
+
+
+                $result = [
+                    "queryText" => $queryText,
+                    "intentBot" => $displayName,
+                    "confidence" => $confidence,
+                    "fulfilmentText" => $fulfilmentText,
+                    "languageCode" => $lgCode,
+
+                ];
+                
+                $sessionsClient->close($session);
+                return response()->json([
+                            'message' => $result,
+                        ], 200);
+            }else{
+                return response()->json([
+                    'error' => 'An unexpected error occurred: ',
+                ], 500);
+            }
+
+            
         } catch (ApiException $e) {
             $errorDetails = json_decode($e->getMessage(), true);
 

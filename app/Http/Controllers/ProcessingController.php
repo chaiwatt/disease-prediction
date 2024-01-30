@@ -17,9 +17,24 @@ class ProcessingController extends Controller
     public function textDetection(Request $request)
     {
         $mesage = $request->data['message'];
+        
         $diablogFlow = new DialogFlow();
         $response = $diablogFlow->detectIntentText($mesage);
-        return $response;
+        // dd($response->content());
+        $responseData = json_decode($response->content(), true);
+
+        if (isset($responseData['error'])) {
+            $responseData = [
+                "message" => [
+                    "queryText" => null,
+                    "intentBot" => null,
+                    "confidence" => null,
+                    "fulfilmentText" => null,
+                    "languageCode" => "en",
+                ],
+            ];
+        }
+        return $responseData;
     }
 
     public function deleteIntent(Request $request)

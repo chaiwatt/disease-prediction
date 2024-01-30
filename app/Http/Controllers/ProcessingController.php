@@ -65,8 +65,8 @@ class ProcessingController extends Controller
         // }
 
        return view('result-render.result', [
-        'allDiseaseWithSymptoms' => $allDiseaseWithSymptoms,
-        'someDiseaseWithSymptoms' => $someDiseaseWithSymptoms,
+            'allDiseaseWithSymptoms' => $allDiseaseWithSymptoms,
+            'someDiseaseWithSymptoms' => $someDiseaseWithSymptoms,
         ])->render();
 
      
@@ -96,6 +96,15 @@ class ProcessingController extends Controller
 
     //     return view('result-render.result', ['sortedDiseases' => $sortedDiseases])->render();
     // }
+
+    public function trainingPhrase()
+    {
+        $diablogFlow = new DialogFlow();
+       
+        $response = $diablogFlow->getTrainingPhrase();
+        
+        return $response;
+    }
 
     
 }

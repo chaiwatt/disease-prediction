@@ -28,6 +28,8 @@ class DashboardSymptomController extends Controller
         $displayName = str_replace(' ', '_', $symptomName);
         $messageTexts = [$symptomName];
 
+        // dd($trainingPhraseParts);
+
         $diablogFlow = new DialogFlow();
         $response = $diablogFlow->createIntent($trainingPhraseParts,$displayName,$messageTexts);
         $symptom = Symptom::where('name',$symptomName)->first();
@@ -37,6 +39,7 @@ class DashboardSymptomController extends Controller
         Symptom::create([
             'name' => $symptomName,
             'intent' => $displayName,
+            'training_phrase' => json_encode($trainingPhraseParts)
         ]);
         return $response;
     }
@@ -56,5 +59,13 @@ class DashboardSymptomController extends Controller
         $response = Gemini::generateText($prompt);
         // dd($response);
         return $response;
+    }
+
+    public function view(Request $request)
+    {
+        $symptomId = $request->data['symptomId'];
+        $symptom = Symptom::find($symptomId);
+        
+        return response()->json(['message' =>json_decode($symptom->training_phrase, true)]);
     }
 }

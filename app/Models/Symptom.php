@@ -12,7 +12,8 @@ class Symptom extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'intent'
+        'intent',
+        'training_phrase'
     ];
 
     public function phrases()

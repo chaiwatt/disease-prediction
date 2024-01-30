@@ -31,6 +31,7 @@
                                     <td>{{$key+1}}</td>
                                     <td>{{$symptom->name}}</td>
                                     <td style="text-align: right">
+                                        <a href="" id="view" data-id="{{$symptom->id}}" class="btn btn-primary">View</a>
                                         <a href="{{route('dashboard.symptom.delete',['id' => $symptom->id])}}"
                                             class="btn btn-danger">Delete</a>
                                     </td>
@@ -51,8 +52,99 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="trainingPhraseModal" tabindex="-1" aria-labelledby="trainingPhraseModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="trainingPhraseModalLabel">Training phrase</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Training phrase</th>
+                            </tr>
+                        </thead>
+                        <tbody id="training_phrase_wrapper">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
+@push('scripts')
+<script>
+    window.params = {
+        viewSymptomRoute: '{{ route('dashboard.symptom.view') }}',
+        url: '{{ url('/') }}',
+        token: $('meta[name="csrf-token"]').attr('content')
+    };
 
+    $(document).on('click', '#view', function (e) {
+        e.preventDefault();
+        var token = window.params.token
+        var viewSymptomRoute = window.params.viewSymptomRoute
+        
+        var symptomId = $(this).data('id');
+
+        var data = {
+            'symptomId': symptomId
+        }
+
+        postRequest(data, viewSymptomRoute, token).then(response => {
+            // console.log(response);
+            const trainingPhraseWrapper = document.getElementById("training_phrase_wrapper");
+            trainingPhraseWrapper.innerHTML = '';
+            
+            // วนลูปผ่าน response.message (array ของ training phrases)
+            response.message.forEach((phrase, index) => {
+                const row = document.createElement("tr");
+            
+                const indexCell = document.createElement("th");
+                indexCell.textContent = index + 1;
+        
+                const phraseCell = document.createElement("td");
+                phraseCell.textContent = phrase;
+        
+                row.appendChild(indexCell);
+                row.appendChild(phraseCell);
+        
+                trainingPhraseWrapper.appendChild(row);
+            });
+
+        }).catch(error => { })
+
+        $('#trainingPhraseModal').modal('show');
+
+    });
+
+      function postRequest(dataSet, url, token) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: url,
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+                data: {
+                    data: dataSet
+                },
+                success: function (data) {
+                    resolve(data)
+                },
+                error: function (error) {
+                    reject(error)
+                },
+            })
+        })
+    }
+</script>
+@endpush
 
 @endsection

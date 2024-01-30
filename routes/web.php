@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
         Route::group(['prefix' => 'symptom'], function () {
             Route::get('', [DashboardSymptomController::class, 'index'])->name('dashboard.symptom');
             Route::get('create', [DashboardSymptomController::class, 'create'])->name('dashboard.symptom.create');
+            Route::post('view', [DashboardSymptomController::class, 'view'])->name('dashboard.symptom.view');
             Route::post('store', [DashboardSymptomController::class, 'store'])->name('dashboard.symptom.store');
             Route::get('delete/{id}', [DashboardSymptomController::class, 'delete'])->name('dashboard.symptom.delete');
             Route::post('gen-phrase', [DashboardSymptomController::class, 'genPhrase'])->name('dashboard.symptom.gen-phrase');
@@ -35,6 +36,10 @@ Route::middleware('auth')->group(function () {
 
 Route::get('', [LandingController::class, 'index'])->name('index');
 Route::get('gen-text', [GeminiController::class, 'genText'])->name('gen-text');
+
+
+
+
 
 
 Route::group(['prefix' => 'processing'], function () {

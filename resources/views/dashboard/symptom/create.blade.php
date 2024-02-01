@@ -109,8 +109,8 @@
             return
         }
 
-        // var prompt = `Create an array of 15 ${symptom} sentences for Dialogflow training phrases by using this sentence "I have a ${symptom}" or similar as guidline. Then end with \\n of each sentence like this: sentence1\\n sentence2\\n sentence3\\n ... and do not add sentence numbers before each sentence.`;
-        var prompt = `Create an array of 15 ${symptom} sentences for Dialogflow training phrases by using this sentence "I have a ${symptom}" or similar as guidline. Then list down line by line for each sentence like this: sentence1\\n sentence2\\n sentence3\\n ... and do not add sentence numbers before each sentence.`;
+        // var prompt = `Create an array of 20 ${symptom} sentences for Dialogflow training phrases by using this sentence "I have a ${symptom}" or similar as guidline. Then end with \\n of each sentence like this: sentence1\\n sentence2\\n sentence3\\n ... and do not add sentence numbers before each sentence.`;
+        var prompt = `Create an array of 20 ${symptom} sentences for Dialogflow training phrases by using this sentence "I have a ${symptom}" or similar as guidline. Then list down line by line for each sentence like this: sentence1\\n sentence2\\n sentence3\\n ... and do not add sentence numbers before each sentence.`;
         $('#prompt').val(prompt);
         $('#genPhraseModal').modal('show');
 

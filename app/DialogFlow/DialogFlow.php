@@ -156,7 +156,7 @@ class DialogFlow
                 $intentName = (string) $intent->getName();
                 $uuid = substr($intentName, strrpos($intentName, '/') + 1);
                 $intentName = $intentsClient->intentName($projectId, $uuid);
-                if($intent->getDisplayName() == "Default Fallback Intent"){
+                if($intent->getDisplayName() != "Default Fallback Intent"){
                     $intentsClient->deleteIntent($intentName);
                 }
                 

@@ -1,5 +1,31 @@
 @extends('layouts.landing')
+@push('styles')
+<style>
+    .spinner {
+        animation: spin 1s linear infinite;
+    }
 
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+@endpush
 @section('content')
 <!-- Start Appointment Section -->
 <section class="cs_shape_wrap" id="appointment">
@@ -38,11 +64,15 @@
                             placeholder="Describe single symptom here then press enter to add to list.">
                         <div class="cs_height_20 cs_height_xl_10"></div>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" style="display: flex; align-items: center;">
 
                         <button class="cs_btn cs_style_1" id="add_symptom">
-                            <span>Add symptom</span>
+                            <span> Add symptom</span>
                         </button>
+
+                        <i class="fa-solid fa-spinner spinner" id="show_spinner"
+                            style="margin-left: 10px; font-size: 35px;"></i>
+
                     </div>
                     <div class="cs_height_18"></div>
                     <div class="col-lg-12">
@@ -80,6 +110,8 @@
 @push('scripts')
 
 <script>
+    $("#show_spinner").hide();
+
     window.params = {
         textDetectionRoute: '{{ route('processing.text-detection') }}',
         diseaseMatchingRoute: '{{ route('processing.disease-matching') }}',
@@ -91,6 +123,10 @@
     $(document).on('keypress', '#prompt', function (e) {
         if (e.which === 13) { 
             e.preventDefault(); 
+
+     
+
+            $("#show_spinner").show();
            
             var token = window.params.token
             var textDetectionRoute = window.params.textDetectionRoute
@@ -129,8 +165,13 @@
                     });
                 }
 
+                $("#show_spinner").hide();
+
                 
-            }).catch(error => { })
+            }).catch(error => { 
+
+                $("#show_spinner").hide();
+            })
             
             $(this).val('');
         }
@@ -148,6 +189,8 @@
         var data = {
             'message': $('#prompt').val()
         }
+
+        $("#show_spinner").show();
 
         postRequest(data, textDetectionRoute, token).then(response => {
             //console.log(response);
@@ -180,8 +223,12 @@
                 });
             }
 
-            
-        }).catch(error => { })
+            $("#show_spinner").hide();
+
+        }).catch(error => { 
+
+            $("#show_spinner").hide();
+        })
         
         $(this).val('');
     

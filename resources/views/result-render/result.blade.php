@@ -7,6 +7,18 @@
         <h2 class="cs_section_title cs_fs_72 m-0">{{$allDiseaseWithSymptoms->count()}} related found</h2>
     </div>
     <div class="cs_height_72 cs_height_lg_50"></div>
+    @if ($allDiseaseWithSymptoms->count() == 0)
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2" style="text-align: center">
+            <div class="cs_accordians cs_style1 cs_heading_color" style="text-align: center">
+                <button class="cs_btn cs_style_1" id="ask-ai">
+                    <span>Ask AI</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    @endif
+
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
             <div class="cs_accordians cs_style1 cs_heading_color">
@@ -22,9 +34,9 @@
                             <span>More Info</span>
                         </button>
                     </div>
-                </div><!-- .cs_accordian -->
+                </div>
                 @endforeach
-            </div><!-- .cs_accordians -->
+            </div>
         </div>
     </div>
 </div>

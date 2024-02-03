@@ -22,17 +22,26 @@
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
             <div class="cs_accordians cs_style1 cs_heading_color">
+                <h2 style="font-size: 50px; text-align:center; color:#fe0365; margin-top:-50px; line-height:70px">If you
+                    have any unusual
+                    symptoms, it is
+                    recommended to
+                    see a doctor as soon
+                    as possible to
+                    receive a diagnosis and
+                    treatment.</h2>
+
                 @foreach ($allDiseaseWithSymptoms as $key => $disease)
                 <div class="cs_accordian active">
+
                     <h2 class="cs_accordian_head cs_heading_color">
                         {{$disease->name}}
                     </h2>
                     <div class="cs_accordian_body">
-                        <p>{{$disease->description}}<a href="{{$disease->url}}" target="blank">More
-                                Info</a> </p>
-                        <button class="cs_btn cs_style_1 mt-3">
+                        <p>{{$disease->description}}</p>
+                        <a href="{{$disease->url}}" class="cs_btn cs_style_1 mt-3">
                             <span>More Info</span>
-                        </button>
+                        </a>
                     </div>
                 </div>
                 @endforeach

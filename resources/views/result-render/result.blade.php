@@ -4,7 +4,7 @@
         <h3 class="cs_section_subtitle text-uppercase cs_accent_color cs_semibold m-0 cs_accent_color cs_fs_32">
             There are</h3>
         <div class="cs_height_5"></div>
-        <h2 class="cs_section_title cs_fs_72 m-0">{{$allDiseaseWithSymptoms->count()}} related found</h2>
+        <h2 class="cs_section_title cs_fs_72 m-0">{{$allDiseaseWithSymptoms->count()}} related found.</h2>
     </div>
     <div class="cs_height_72 cs_height_lg_50"></div>
     {{-- @if ($allDiseaseWithSymptoms->count() == 0)

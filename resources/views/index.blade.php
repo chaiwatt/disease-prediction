@@ -230,7 +230,7 @@
             $("#show_spinner").hide();
         })
         
-        $(this).val('');
+        $('#prompt').val('');
     
     });
 

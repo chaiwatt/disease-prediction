@@ -16,13 +16,15 @@ class Symptom extends Model
         'training_phrase'
     ];
 
-    public function phrases()
-    {
-        return $this->hasMany(Phrase::class, 'symptom_id');
-    }
-
+  
     public function diseases()
     {
         return $this->belongsToMany(Disease::class, 'disease_symptoms', 'symptom_id', 'disease_id');
     }
+
+      public function phrases()
+    {
+        return $this->hasMany(Phrase::class, 'symptom_id');
+    }
+
 }

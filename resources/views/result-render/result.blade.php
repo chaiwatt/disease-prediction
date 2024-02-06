@@ -38,8 +38,6 @@
                         <strong>{{$diseaseMatche['disease']['name']}}</strong> | <span class="badge bg-warning"
                             style="color:#274760">{{$diseaseMatche['matches']}} ({{$diseaseMatche['percent_match']}}%
                             matches)</span>
-
-
                     </h2>
                     <div class="cs_accordian_body">
                         <p>{{$diseaseMatche['disease']['description']}}</p>

@@ -57,7 +57,6 @@ class DashboardSymptomController extends Controller
     {
         $prompt = $request->data['prompt'];
         $response = Gemini::generateText($prompt);
-        // dd($response);
         return $response;
     }
 

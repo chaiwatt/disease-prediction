@@ -8,9 +8,9 @@
             <li>
                 <a href="{{route('dashboard.symptom')}}">Symptom</a>
             </li>
-            {{-- <li>
-                <a href="#">Intent</a>
-            </li> --}}
+            <li>
+                <a href="{{route('api-link')}}">API Link</a>
+            </li>
             <li>
                 <a href="{{ route('logout') }}"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span>Logout</span></a>

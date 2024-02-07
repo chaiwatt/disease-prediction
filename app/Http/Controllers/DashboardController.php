@@ -58,4 +58,8 @@ class DashboardController extends Controller
         return response()->json($disease);
 
     }
+    public function apiLink()
+    {
+        return view('dashboard.api-link.index');
+    }
 }
